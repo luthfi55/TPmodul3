@@ -8,11 +8,15 @@ namespace tpmodul3_1302204013
         public static void Main(string[] args)
         {
             KodePos table_Kodepos = new KodePos();
-            Console.WriteLine("Get Kode Pos Mengger :\n ");            
+            Console.WriteLine("Get Kode Pos Mengger :\n ");
             table_Kodepos.getKodepos("Mengger");
             Console.WriteLine("\nGet All Kode Pos :\n ");
             Console.WriteLine("Kelurahan \t Kode Pos\n");
             table_Kodepos.getAllkodepos();
+
+            Console.WriteLine("\nKunci Pintu :\n");
+            DoorMachine pintu = new DoorMachine();
+            pintu.kunci();
         }
 
     }
@@ -54,5 +58,39 @@ namespace tpmodul3_1302204013
         }
     }
 
+    class DoorMachine
+    {
+        enum State { Terkunci, Terbuka };
+        public void kunci() 
+        {
+            State state = State.Terkunci;
 
+            String[] screenName = { "terkunci", "terbuka" };
+            do
+            {
+                Console.WriteLine("\nPintu " + screenName[(int)state] + " \n");
+                Console.Write("Masukkan perintah : ");
+                String command = Console.ReadLine();
+                switch (state)
+                {
+                    case State.Terkunci:
+                        if (command == "Buka Pintu")
+                        {
+                            state = State.Terbuka;
+                        }
+                        break;
+                    case State.Terbuka:
+                        if (command == "Kunci Pintu")
+                        {
+                            state = State.Terkunci;
+                        }
+                        break;
+
+
+
+                }
+            } while (state != State.Terkunci);
+        }
+
+    }
 }
